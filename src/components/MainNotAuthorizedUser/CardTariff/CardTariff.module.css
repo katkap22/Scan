@@ -1,0 +1,111 @@
+/*@import '../../../variables.css';*/
+@value colors: "../../../variables.css";
+@value baseGreen, baseBlack, baseWhite, extraYellow, extraGreen, extraBlue from colors;
+
+
+.cardTariff {
+    max-width: 415px;
+
+    /*border: 2px solid #FFB64F;*/
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    position: relative;
+}
+
+.header {
+    background: #FFB64F;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    height: 132px;
+}
+
+.titleHeader {
+    padding: 20px 360px 0 20px;
+    margin-bottom: 10px;
+
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: 0.01em;
+}
+
+.subTitle {
+    padding: 0 0 24px 20px;
+
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+}
+
+.iconTariff {
+    position: absolute;
+    top: 11px;
+    right: 15px;
+    left: 307px;
+}
+
+.main {
+    padding: 33px 14px 0 30px;
+}
+
+.prices {
+    margin-bottom: 59px;
+
+    display: flex;
+    align-items: center;
+    column-gap: 19px;
+    row-gap: 10px;
+    flex-wrap: wrap;
+}
+
+.discountPrice {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: 0.01em;
+}
+
+.price {
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 0.01em;
+    text-decoration-line: line-through;
+    opacity: 0.5;
+}
+
+.creditPrice {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+}
+
+.titleMain {
+    margin-bottom: 10px;
+
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+}
+
+.list {
+    margin-bottom: 55px;
+}
+
+.list li {
+    margin-bottom: 5px;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+}
+
+.list li img {
+    margin-right: 8px;
+}
+
+
+.btn {
+    composes: btn from '../../../App.module.css';
+    margin: 0 30px 24px;
+}

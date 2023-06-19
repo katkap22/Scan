@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import s from './App.module.css';
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import {Route, Routes} from "react-router-dom";
+import MainNotAuthorizedUser from "./components/MainNotAuthorizedUser/MainNotAuthorizedUser";
+import AuthorizationForm from "./components/AuthorizationForm/AuthorizationForm";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className={s.App}>
+            <Header />
+
+            <div className="wrapper">
+
+                <Routes>
+
+                    <Route path="/main/*"
+                           element={<MainNotAuthorizedUser />} />
+                    <Route path="authorizationForm/*"
+                           element={<AuthorizationForm />} />
+
+                </Routes>
+
+            </div>
+
+            <Footer />
+        </div>
+    );
 }
 
 export default App;

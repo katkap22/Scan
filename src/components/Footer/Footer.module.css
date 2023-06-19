@@ -1,0 +1,48 @@
+@value colors: "../../variables.css";
+@value baseGreen, baseBlack, baseWhite, extraYellow, extraGreen, extraBlue from colors;
+
+.footer {
+    height: 141px;
+    background-color: baseGreen;
+
+    font-size: 14px;
+    line-height: 17px;
+    text-align: right;
+}
+
+.content {
+    margin: 0 auto;
+    padding: 0 12px 0 27px;
+    max-width: 1374px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 30px; /*чтобы не прилипали друг к другу при уменьшении экрана*/
+    row-gap: 20px; /*для мобильной адаптации*/
+    /*flex-wrap: wrap;*/
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    row-gap: 21px;
+    column-gap: 28px;
+    flex-wrap: wrap;
+    text-align: right;
+    color: #fff;
+}
+
+.contacts {
+    max-width: 199px;
+
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.copyright {
+    font-size: 12px;
+    line-height: 15px;
+}

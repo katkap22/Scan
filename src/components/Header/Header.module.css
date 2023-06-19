@@ -1,0 +1,107 @@
+@value colors: "../../variables.css";
+@value baseGreen, baseBlack, baseWhite, extraYellow, extraGreen, extraBlue from colors;
+
+.content {
+    composes: content from '../../App.module.css';
+    /*margin: 0 auto;*/
+    /*padding: 0 12px;*/
+    /*max-width: 1344px;*/
+}
+
+.header {
+    height: 93px;
+
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.001em;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 30px; /*чтобы не прилипали друг к другу при уменьшении экрана*/
+    row-gap: 20px; /*для мобильной адаптации*/
+    flex-wrap: wrap;
+}
+
+.navHeader {
+    margin-left: 107px;
+    display: flex;
+    column-gap: 49px;
+    row-gap: 10px; /*для мобильной адаптации*/
+    flex-wrap: wrap;
+}
+
+.navLink {
+    transition: opacity 0.2s ease-in;
+}
+
+.navLink:hover {
+    opacity: 0.7;
+}
+
+
+.loginPanel {
+    display: flex;
+    align-items: center;
+    column-gap: 19px;
+    flex-wrap: wrap;
+}
+
+.loginPanelMobile {
+    display: none;
+    padding-right: 12px;
+}
+
+.link {
+   opacity: 0.4;
+}
+
+.btnHeader {
+    width: 65px;
+    height: 26px;
+    background-color: extraGreen;
+    border-radius: 5px;
+
+    transition: opacity 0.2s ease-in;
+}
+
+.btnHeader:hover {
+    opacity: 0.7;
+}
+
+.btnHeader:active {
+    position: relative;
+    top: 1px;
+}
+
+@media screen and (max-width: 820px) {
+    .content {
+        composes: content from '../../App.module.css';
+        max-width: 365px
+    ;
+    }
+
+    .logo {
+        width: 111px;
+        height: 111px;
+    }
+
+    .navHeader {
+        display: none;
+    }
+
+    .loginPanel {
+        display: none;
+    }
+
+    .loginPanelMobile {
+        display: block;
+    }
+
+    .link {
+        display: none;
+    }
+}
+
