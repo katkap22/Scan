@@ -6,8 +6,65 @@
     composes: content from '../../App.module.css';
 }
 
+.headerResult {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 21px;
+    margin-bottom: -10px;
+}
+
+.wrapperTitle {
+    max-width: 509px;
+}
+
 .title {
+    margin-bottom: 36px;
     composes: title from '../../App.module.css';
     letter-spacing: 1.6px;
     max-width: 509px;
+}
+
+.subTitle {
+    font-size: 20px;
+    line-height: normal;
+    letter-spacing: 0.4px;
+}
+
+.total {
+    margin-bottom: 107px;
+}
+
+.titlesMainResult {
+    composes: title from '../../App.module.css';
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: 0.6px;
+}
+
+.subTitleTotal {
+    margin-top: 17px;
+
+    color: #949494;
+    font-size: 18px;
+    line-height: normal;
+    letter-spacing: 0.36px;
+}
+
+.sliderResult {
+   margin-top: 27px;
+}
+
+.docs {
+    margin-top: 58px;
+}
+
+
+
+
+.btnResult {
+    margin-top: 38px;
+    display: flex;
+    justify-content: center;
 }

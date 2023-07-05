@@ -84,8 +84,6 @@ function App() {
             })
     }}, [isLoggedIn, login, password, message]);
 
-    console.log('isLoggedIn', isLoggedIn);
-
     useEffect(() => {
         if(isLoggedIn)
         fetchAccountInfo();
@@ -145,7 +143,6 @@ function App() {
 
                 <AuthProvider>
                     <Routes>
-
                         <Route path="/"
                                element={<MainPage isLoggedin={isLoggedIn}/>}/>
                         <Route path="/loginForm"

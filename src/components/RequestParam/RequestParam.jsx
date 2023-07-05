@@ -5,10 +5,15 @@ import folders from "../../assets/images/folders.svg";
 import imgReq from "../../assets/images/imgRequestParam.svg";
 import Button from "../UI/button/Button";
 import classNames from "classnames";
+import {NavLink} from "react-router-dom";
 
 
 const RequestParam = () => {
 
+    const searchInfo =() => {
+        alert('sdfsfsdf');
+
+    }
 
     return (
         <header className={s.requestParam}>
@@ -26,7 +31,7 @@ const RequestParam = () => {
                 </div>
                 <div className={s.flexRow}>
                     <form className={s.formRequest}
-                          onSubmit={()=> alert('sdf')}>
+                          onSubmit={searchInfo}>
                         <div className={s.left}>
                             <label>ИНН компании<span>*</span>
                                 <input type="text"
@@ -71,7 +76,9 @@ const RequestParam = () => {
                             </ul>
 
                             {/*<button className={s.searchBtn}>Поиск</button>*/}
-                            <Button className={classNames(s.searchBtn)}>Поиск</Button>
+                            <NavLink to='/result'>
+                                <Button className={classNames(s.searchBtn)}>Поиск</Button>
+                            </NavLink>
                             <div>* Обязательные к заполнению поля</div>
                         </div>
                     </form>

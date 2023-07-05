@@ -20,11 +20,10 @@ const LoginForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-console.log(props.isLoggedIn);
-        // localStorage.setItem('isLoggedIn', true);
-        console.log('form is submitted. login value is ', props.login, 'password value is ', props.password);
+console.log('form is submitted. login value is ', props.login, 'password value is ', props.password);
 
         props.setIsLoggedIn(true);
+        // localStorage.setItem('isLoggedIn', true)
 console.log(props.isLoggedIn);
 
         const userCurrent = props.users.find(user => user.login === props.login && user.password === props.password);

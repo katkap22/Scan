@@ -21,6 +21,7 @@ const Header = (props) => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('expire');
         localStorage.removeItem('userCurrent');
+        // localStorage.removeItem('isLoggedIn');
         props.setUserCurrent(null);
         props.setLogin('');
         props.setPassword('');

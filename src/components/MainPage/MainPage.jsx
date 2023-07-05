@@ -83,8 +83,8 @@ const MainPage = (props) => {
                     <div className={s.content}>
                         <h2>Почему именно мы</h2>
                     </div>
-                        <div className={s.slider}>
 
+                        <div className={s.slider}>
                             <div className={s.slides}
                                  // style={{ transform: `translateX(-${slide * 100}%)` }}
                             >
