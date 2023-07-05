@@ -1,0 +1,245 @@
+@value colors: "../../variables.css";
+
+@value baseGreen, baseBlack, baseWhite, extraYellow, extraGreen, extraBlue from colors;
+
+.content {
+    composes: content from '../../App.module.css';
+}
+
+.requestParam {
+    margin-top: 71px;
+}
+
+.title {
+    composes: title from '../../App.module.css';
+    letter-spacing: 0.03em;
+    max-width: 800px;
+}
+
+.subTitle {
+    max-width: 1298px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+div.subTitleText {
+    margin-top: 23px;
+}
+
+.subTitleText p {
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+}
+
+.subTitleImg {
+    display: flex;
+    align-items: center;
+    column-gap: 166px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+.flexRow {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 80px;
+    margin-bottom: 64px;
+    /*flex-wrap: wrap;*/
+    row-gap: 10px;
+}
+
+.formRequest {
+    margin-top: 47px;
+    padding: 21px 39px 32px 44px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+}
+
+.left {
+    margin-right: 11px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 21px;
+}
+
+.left label {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.03em;
+}
+
+span {
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 0.03em;
+}
+
+.left input {
+    border: 1px solid #C7C7C7;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    padding: 13px;
+    display: block;
+    margin-top: 20px;
+    /*margin-right: 130px;*/
+    max-width: 242px;
+    height: 43px;
+}
+
+.left input::placeholder, .left select option {
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.03em;
+    color: #949494;
+    text-align: center;
+}
+
+.selectWrapper {
+    position: relative;
+    /*margin-right: 130px;*/
+    max-width: 242px;
+    height: 43px;
+}
+
+.selectWrapper::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 13px;
+    transform: translateY(-50%);
+    display: block;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 13.74px 12px 0 12px;
+    border-color: #D9D9D9 transparent transparent transparent;
+}
+
+.left .select option {
+    text-align: start;
+    color: #000;
+}
+
+.left .select {
+    appearance: none;
+    display: block;
+    margin-top: 20px;
+
+    outline: none;
+    border: 1px solid #C7C7C7;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    padding: 13px 42px 13px 22px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.left .select:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px #38577a, 0 0 10px #7e9bbd;
+}
+
+.left .dateWrapper {
+    display: flex;
+    /*flex-wrap: wrap;*/
+    align-items: center;
+    column-gap: 18px;
+}
+
+.dateWrapper input {
+    max-width: 176px;
+    height: 43px;
+}
+
+.inputDate {
+    position: relative;
+    outline: none;
+    border: 1px solid #C7C7C7;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    padding: 13px 42px 13px 22px;
+    cursor: pointer;
+}
+
+.inputDate::-webkit-calendar-picker-indicator {
+    /*filter: invert();*/
+    /*appearance: none;*/
+    opacity: 0;
+}
+
+.inputDate::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 11px;
+    transform: translateY(-50%);
+    display: block;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 13.74px 12px 0 12px;
+    border-color: #D9D9D9 transparent transparent transparent;
+    cursor: pointer;
+}
+
+
+
+.right {
+    padding-top: 15px;
+}
+
+.right ul li {
+    font-size: 18px;
+    letter-spacing: 0.54px;
+    margin-bottom: 15px;
+}
+
+.right ul li input {
+    margin-right: 20px;
+    width: 14px;
+    height: 14px;
+}
+
+.searchBtn {
+    max-width: 305px;
+    height: 59px;
+    padding: 16px 117px;
+    margin: 145px 0 10px 110px;
+    background-color: extraBlue;
+    border-radius: 5px;
+
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: 0.02em;
+
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+.searchBtn:hover {
+    opacity: 1;
+}
+
+.right div {
+    margin-left: 110px;
+    color: #949494;
+    font-size: 14px;
+    letter-spacing: 0.42px;
+}
+
+
+.flexRow img {
+    margin-top: 110px;
+    margin-right: -70px;
+}
+
+
+
+
+

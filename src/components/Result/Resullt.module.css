@@ -1,0 +1,13 @@
+.result {
+    padding: 69px 0 109px;
+}
+
+.content {
+    composes: content from '../../App.module.css';
+}
+
+.title {
+    composes: title from '../../App.module.css';
+    letter-spacing: 1.6px;
+    max-width: 509px;
+}

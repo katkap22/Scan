@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import s from "./MainNotAuthorizedUser.module.css";
+import s from "./MainPage.module.css";
+import classNames from "classnames";
 import title from "../../assets/images/titleRightSide.svg";
 import arrow from "../../assets/images/arrowRight.svg";
 import icon1 from "../../assets/images/iconWhy1.svg";
@@ -10,9 +11,10 @@ import imgWhy from "../../assets/images/imgWhy.svg";
 import CardTariff from "./CardTariff/CardTariff";
 import Slide from "./Slide/Slide";
 import {v1} from "uuid";
-// import classNames from "classnames";
+import {NavLink} from "react-router-dom";
+import Button from "../UI/button/Button";
 
-const MainNotAuthorizedUser = () => {
+const MainPage = (props) => {
 
     let [slides, setSlides] = useState([
         {id: v1(), icon: icon1, text: "Высокая и оперативная скорость обработки заявки"},
@@ -49,10 +51,26 @@ const MainNotAuthorizedUser = () => {
                 <section className={s.title}>
                     <div className={s.content}>
                         <div className={s.rowTitle}>
-                            <div className={s.leftSide}>
+                            <div className={classNames(s.leftSide, s.titleMain)}>
                                 <h1>сервис по поиску <br/> публикаций<br/> о компании<br/> по его ИНН</h1>
                                 <div>Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.
                                 </div>
+
+                                {
+                                    props.isLoggedin &&
+                                    // <NavLink to="/RequestParam">
+                                    //     <button className={s.requestBtn}>
+                                    //         Запросить данные
+                                    //     </button>
+                                    // </NavLink>
+
+                                    <NavLink to="/RequestParam">
+                                        <Button className={classNames(s.requestBtn)} >
+                                          Запросить данные
+                                        </Button>
+                                    </NavLink>
+
+                                }
                             </div>
                             <div className={s.rightSide}>
                                 <img src={title} alt="happy man"/>
@@ -129,4 +147,4 @@ const MainNotAuthorizedUser = () => {
 
 }
 
-export default MainNotAuthorizedUser;
+export default MainPage;

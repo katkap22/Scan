@@ -1,0 +1,30 @@
+@value colors: "../../../variables.css";
+@value baseGreen, baseBlack, baseWhite, extraYellow, extraGreen, extraBlue from colors;
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    background: baseGreen;
+}
+
+.modalContent {
+    padding: 25px;
+    background: transparent;
+    /*background: white;*/
+    min-width: 295px;
+
+    color: #FFF;
+    font-size: 16px;
+    line-height: normal;
+    letter-spacing: 0.16px;
+}
+
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

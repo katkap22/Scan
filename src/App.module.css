@@ -43,7 +43,6 @@
   font-style: normal;
   font-weight: 400;
   color: baseBlack;
-
 }
 
 .content {
@@ -52,10 +51,22 @@
   max-width: 1350px;
 }
 
-.main {
-  font-family: 'Ferry', serif;
-  background-color: baseWhite;
+.titleMain {
+  font-family: 'Ferry', sans-serif;
+  font-style: normal;
+  font-weight: 900;
 }
+
+.title {
+  composes: titleMain;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+/*.main {*/
+/*  font-family: 'Ferry', serif;*/
+/*  background-color: baseWhite;*/
+/*}*/
 
 .footer {
   font-family: 'Inter', sans-serif;

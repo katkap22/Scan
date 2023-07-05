@@ -3,14 +3,10 @@
 
 .content {
     composes: content from '../../App.module.css';
-    /*margin: 0 auto;*/
-    /*padding: 0 12px;*/
-    /*max-width: 1344px;*/
 }
 
 .header {
     height: 93px;
-
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.001em;
@@ -23,24 +19,8 @@
     column-gap: 30px; /*чтобы не прилипали друг к другу при уменьшении экрана*/
     row-gap: 20px; /*для мобильной адаптации*/
     flex-wrap: wrap;
+    position: relative;
 }
-
-.navHeader {
-    margin-left: 107px;
-    display: flex;
-    column-gap: 49px;
-    row-gap: 10px; /*для мобильной адаптации*/
-    flex-wrap: wrap;
-}
-
-.navLink {
-    transition: opacity 0.2s ease-in;
-}
-
-.navLink:hover {
-    opacity: 0.7;
-}
-
 
 .loginPanel {
     display: flex;
@@ -51,7 +31,6 @@
 
 .loginPanelMobile {
     display: none;
-    padding-right: 12px;
 }
 
 .link {
@@ -76,20 +55,86 @@
     top: 1px;
 }
 
+.infoPanel {
+    display: flex;
+    align-items: center;
+    column-gap: 111px;
+}
+
+.infoCompany {
+    width: 175px;
+    height: 63px;
+
+    padding: 14px 16px 18px 10px;
+    background: rgba(217, 217, 217, 0.3);
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 7px;
+}
+
+.infoCompany p {
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.infoCompany span {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    margin-left: 9px;
+
+}
+
+.limit span {
+    color: #8AC540;
+}
+
+.infoUser {
+    display: flex;
+    column-gap: 4px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    align-items: end;
+}
+
+.column p {
+    font-size: 14px;
+    line-height: 17px;
+    /*opacity: 0.7;*/
+}
+
+.column button {
+    font-size: 10px;
+    line-height: 12px;
+    opacity: 0.4;
+}
+
+.infoUser img {
+    width: 32px;
+    height: 32px;
+}
+
+
 @media screen and (max-width: 820px) {
     .content {
         composes: content from '../../App.module.css';
-        max-width: 365px
-    ;
+        max-width: 347px;
+        padding: 0 6px 0 0;
     }
 
     .logo {
         width: 111px;
         height: 111px;
-    }
-
-    .navHeader {
-        display: none;
+        position: absolute;
+        top: -10px;
     }
 
     .loginPanel {
@@ -98,10 +143,46 @@
 
     .loginPanelMobile {
         display: block;
+        top: 34px;
+        right: 6px;
+        position: absolute;
     }
 
     .link {
         display: none;
+    }
+
+
+
+    .infoCompany {
+        width: 132px;
+        height: 75px;
+
+        margin-left: 141px;
+        margin-top: 9px;
+        padding: 5px 20px 5px 10px;
+        align-items: flex-start;
+    }
+
+    .infoCompany p {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        font-size: 8px;
+        line-height: 10px;
+        /*opacity: 0.4;*/
+    }
+
+    .infoCompany span {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17px;
+        margin-left: 0;
+    }
+
+    .infoUser {
+        display: none;
+
     }
 }
 

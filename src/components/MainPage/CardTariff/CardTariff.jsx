@@ -3,6 +3,7 @@ import s from './CardTariff.module.css';
 import iconBeginner from '../../../assets/images/iconBeginner.svg';
 import iconList from '../../../assets/images/iconsList.svg';
 import {NavLink} from "react-router-dom";
+import Button from "../../UI/button/Button";
 
 const CardTariff = (props) => {
     const {title, subTitle, discountPrice, price, creditPrice, item1, item2, item3} = {...props}
@@ -29,8 +30,11 @@ const CardTariff = (props) => {
                     </ul>
                 </div>
             </div>
+            <div className={s.btnCardTariff}>
+                <NavLink to="#"><Button className={s.btn}>Подробнее</Button></NavLink>
+            </div>
+            {/*<NavLink to="#"><button className={s.btn}>Подробнее</button></NavLink>*/}
 
-            <NavLink to="#"><button className={s.btn}>Подробнее</button></NavLink>
 
         </div>
     );
