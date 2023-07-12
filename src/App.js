@@ -64,18 +64,22 @@ function App() {
 
     async function logIn(login, password) {
         try {
-            const response = await AuthService.logIn(login, password);
-            localStorage.setItem('accessToken', response.data.accessToken);
-            localStorage.setItem('expire', response.data.expire);
-            setIsLoggedIn(true);
-            const userCurrent = users.find(user => user.login === login && user.password === password);
-            localStorage.setItem('userCurrent', JSON.stringify(userCurrent));
-            fetchAccountInfo();
-            goHome();
+            await AuthService.logIn(login, password)
+                .then(response => {
+                    if (response.status === 200) {
+                        localStorage.setItem('accessToken', response.data.accessToken);
+                        localStorage.setItem('expire', response.data.expire);
+                        setIsLoggedIn(true);
+                        const userCurrent = users.find(user => user.login === login && user.password === password);
+                        localStorage.setItem('userCurrent', JSON.stringify(userCurrent));
+                        fetchAccountInfo();
+                        goHome();
+                    }
+                })
         } catch (e) {
             console.log('e: ', e)
             setError(e.message);
-            setMessage('Страница не найдена, попробуйте еще раз...');
+            setMessage('Введите корректные данные');
         }
     }
 

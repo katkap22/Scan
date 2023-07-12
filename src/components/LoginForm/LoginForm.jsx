@@ -59,6 +59,10 @@ const LoginForm = (props) => {
                                            required />
                                 </label>
 
+                                <div className={s.errorLogin}>
+                                    {props.error && <p>{props.message}</p>}
+                                </div>
+
                                 <label className={s.label}>Пароль:
                                     <input className={s.input}
                                            type="password"
