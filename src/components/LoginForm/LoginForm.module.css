@@ -179,6 +179,14 @@ button.active {
     display: none;
 }
 
+.errorLogin {
+    color: red;
+    display: flex;
+    justify-content: center;
+    margin: -15px auto 15px;
+
+}
+
 @media screen and (max-width: 820px) {
 
     .loginForm {

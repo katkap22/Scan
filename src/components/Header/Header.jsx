@@ -7,25 +7,14 @@ import line from '../../assets/images/lineHeader.svg';
 import menuBurger from "../../assets/images/menuBurger.svg";
 
 import spinner from "../../assets/images/spinner.svg";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import Modal from "../UI/modal/Modal";
 import Navigation from "../UI/navigation/Navigation";
 import Loader from "../UI/loader/Loader";
+import LoginForm from "../LoginForm/LoginForm";
 
 
 const Header = (props) => {
-
-
-    const handleLogOut = () => {
-        props.setIsLoggedIn(false);
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('expire');
-        localStorage.removeItem('userCurrent');
-        // localStorage.removeItem('isLoggedIn');
-        props.setUserCurrent(null);
-        props.setLogin('');
-        props.setPassword('');
-    }
 
     return (
         <header className={s.header}>
@@ -91,10 +80,13 @@ const Header = (props) => {
 
                                 <div className={s.infoUser}>
                                     <div className={s.column}>
-                                        <p>{props.userCurrent.name}</p>
-                                        <button onClick={handleLogOut}>Выйти</button>
+                                        <p>{JSON.parse(localStorage.getItem('userCurrent')).name}</p>
+                                        {/*<p>{props.userCurrent.name}</p>*/}
+                                        <NavLink to={'/'}>
+                                            <button onClick={props.logOut}>Выйти</button>
+                                        </NavLink>
                                     </div>
-                                    <img src={props.userCurrent.ava} alt='avatar'/>
+                                    <img src={JSON.parse(localStorage.getItem('userCurrent')).ava} alt='avatar'/>
                                 </div>
                             </div>
                     }

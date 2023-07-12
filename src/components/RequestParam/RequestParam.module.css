@@ -77,6 +77,10 @@ span {
     letter-spacing: 0.03em;
 }
 
+span.spanError {
+    color: red;
+}
+
 .left input {
     border: 1px solid #C7C7C7;
     border-radius: 5px;
@@ -89,12 +93,28 @@ span {
     height: 43px;
 }
 
+.left .inputError {
+    border-color: red;
+}
+
 .left input::placeholder, .left select option {
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.03em;
     color: #949494;
     text-align: center;
+}
+
+.left .inputError::placeholder {
+    color:red;
+}
+
+.error {
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.03em;
+    color: red;
+    margin-left: 15px;
 }
 
 .selectWrapper {

@@ -1,0 +1,47 @@
+
+.slider {
+    composes: content from '../../../App.module.css';
+    max-width: 1376px;
+
+    margin: 50px auto;
+
+    position: relative;
+}
+
+.slides {
+    padding: 20px 4px;
+    margin: 0 39px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 30px;
+    /*flex-wrap: wrap;*/
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out;
+}
+
+.arrows {
+    composes: content from '../../../App.module.css';
+    padding: 0;
+    max-width: 1346px;
+
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.arrows img {
+    width: 39px;
+    height: 39px;
+
+    opacity: 0.2;
+}
+
+.slider .right {
+    transform: rotate(-180deg);
+}

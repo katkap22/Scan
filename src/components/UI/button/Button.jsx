@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 const Button = ({children, className, ...props}) => {
     return (
-        <button {...props} className={classNames(s.btn, className)}>
+        <button {...props} type='submit' className={classNames(s.btn, className)}>
             {children}
         </button>
     );

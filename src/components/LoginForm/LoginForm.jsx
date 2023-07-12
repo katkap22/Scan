@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from "./LoginForm.module.css";
 import classNames from "classnames";
 import imgAuth from "../../assets/images/imgAuth.svg";
@@ -12,30 +12,14 @@ import Button from "../UI/button/Button";
 
 
 const LoginForm = (props) => {
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
 
-    const navigate = useNavigate();
-
-    const goHome = () => navigate('/', {replace: true})
-
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-console.log('form is submitted. login value is ', props.login, 'password value is ', props.password);
-
-        props.setIsLoggedIn(true);
-        // localStorage.setItem('isLoggedIn', true)
-console.log(props.isLoggedIn);
-
-        const userCurrent = props.users.find(user => user.login === props.login && user.password === props.password);
-        console.log(userCurrent);
-        if (!props.isLoggedIn) {
-            props.setUserCurrent(userCurrent);
-            localStorage.setItem('userCurrent', JSON.stringify(userCurrent));
-            console.log(userCurrent.name);
-            console.log(userCurrent.ava);
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            props.logIn(login, password);
         }
-        goHome();
-    }
+
 
     return (
         <div className={s.loginForm}>
@@ -70,8 +54,8 @@ console.log(props.isLoggedIn);
                                     <input className={s.input}
                                            type="text"
                                            name="text"
-                                           value={props.login}
-                                           onChange={e => props.setLogin(e.target.value)}
+                                           value={login}
+                                           onChange={e => setLogin(e.target.value)}
                                            required />
                                 </label>
 
@@ -80,18 +64,24 @@ console.log(props.isLoggedIn);
                                            type="password"
                                            name="password"
                                            autoComplete="off"
-                                           value={props.password}
-                                           onChange={e => props.setPassword(e.target.value)}
+                                           value={password}
+                                           onChange={e => setPassword(e.target.value)}
                                            required />
                                 </label>
+
+                                <div className={s.errorLogin}>
+                                    {props.error && <p>{props.message}</p>}
+                                </div>
 
                                 {/*<button className={classNames(s.submit, props.login && props.password ? s.active : {})}>*/}
                                 {/*    Войти*/}
                                 {/*</button>*/}
 
-                                <Button className={classNames(s.submit,props.login && props.password ? s.active : {})}>
-                                    Войти
-                                </Button>
+                                {/*<NavLink to={'/'}>*/}
+                                    <Button className={classNames(s.submit,props.login && props.password ? s.active : {})}>
+                                        Войти
+                                    </Button>
+                                {/*</NavLink>*/}
 
                                 <div className={s.restorePassw}><NavLink to='#'>Восстановить пароль</NavLink></div>
                                 <div className={s.titleSocial}>Войти через:</div>

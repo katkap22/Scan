@@ -13,11 +13,24 @@
     position: relative;
 }
 
+.cardTariffActive {
+    border: 2px solid #FFB64F;
+}
+
 .header {
     background: #FFB64F;
     border-radius: 10px 10px 0 0;
     padding: 10px;
     height: 132px;
+}
+
+.pro {
+    background: #7CE3E1;
+}
+
+.business {
+    background: #000;
+    color: #fff;
 }
 
 .titleHeader {
@@ -59,6 +72,10 @@
     flex-wrap: wrap;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .discountPrice {
     font-weight: 500;
     font-size: 30px;
@@ -76,6 +93,7 @@
 }
 
 .creditPrice {
+    height: 22px;
     font-size: 18px;
     line-height: 22px;
     letter-spacing: 0.01em;
@@ -107,4 +125,29 @@
 
 .btnCardTariff {
     margin: 0 30px;
+}
+
+.activeTariffBtn {
+    padding: 18px 40px 17px 40px;
+    background: #D2D2D2;
+    color: #000;
+}
+
+.activePlanka {
+    position: absolute;
+    top: 144px;
+    right: 10px;
+    width: 134px;
+    height: 24px;
+    padding: 3px 0;
+
+    border-radius: 10px;
+    background: #3BA5E0;
+}
+.activePlanka p {
+    text-align: center;
+    color: #FFF;
+    font-size: 14px;
+    line-height: normal;
+    letter-spacing: 0.14px;
 }
