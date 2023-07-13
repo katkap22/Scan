@@ -7,7 +7,7 @@ import google from "../../assets/images/google.svg";
 import facebook from "../../assets/images/facebook.svg";
 import yandex from "../../assets/images/yandex.svg";
 import lock from "../../assets/images/lock.svg";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Button from "../UI/button/Button";
 
 
@@ -51,7 +51,7 @@ const LoginForm = (props) => {
                             <form onSubmit={handleSubmit}>
 
                                 <label className={s.label}>Логин или номер телефона:
-                                    <input className={s.input}
+                                    <input className={classNames(s.input, props.error && s.error)}
                                            type="text"
                                            name="text"
                                            value={login}
@@ -64,7 +64,7 @@ const LoginForm = (props) => {
                                 </div>
 
                                 <label className={s.label}>Пароль:
-                                    <input className={s.input}
+                                    <input className={classNames(s.input, props.error && s.error)}
                                            type="password"
                                            name="password"
                                            autoComplete="off"
