@@ -81,7 +81,6 @@ const Header = (props) => {
                                 <div className={s.infoUser}>
                                     <div className={s.column}>
                                         <p>{JSON.parse(localStorage.getItem('userCurrent')).name}</p>
-                                        {/*<p>{props.userCurrent.name}</p>*/}
                                         <NavLink to={'/'}>
                                             <button onClick={props.logOut}>Выйти</button>
                                         </NavLink>

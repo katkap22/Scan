@@ -15,7 +15,8 @@
 }
 
 .btn:hover {
-    opacity: 0.7;
+    border: 1 px solid extraBlue;
+    /*opacity: 0.7;*/
 }
 
 .btn:active {

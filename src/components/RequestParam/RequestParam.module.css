@@ -95,6 +95,7 @@ span.spanError {
 
 .left .inputError {
     border-color: red;
+    color: red;
 }
 
 .left input::placeholder, .left select option {
@@ -115,6 +116,16 @@ span.spanError {
     letter-spacing: 0.03em;
     color: red;
     margin-left: 15px;
+    margin-top: 4px;
+}
+
+.errorDate p{
+    margin-top: 7px;
+   text-align: center;
+}
+
+.errorCountDoc {
+    margin-left: 50px;
 }
 
 .selectWrapper {
@@ -243,6 +254,11 @@ span.spanError {
 }
 
 .searchBtn:hover {
+    border: 1 px solid extraBlue;
+    /*opacity: 1;*/
+}
+
+.searchBtn.active {
     opacity: 1;
 }
 

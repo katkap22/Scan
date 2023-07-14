@@ -5,12 +5,11 @@ import folders from "../../assets/images/folders.svg";
 import imgReq from "../../assets/images/imgRequestParam.svg";
 import Button from "../UI/button/Button";
 import classNames from "classnames";
-import {NavLink, useNavigate} from "react-router-dom";
-import ObjectsearchHistograms from "../../API/objectsearchHistograms";
 import {useForm} from "react-hook-form";
 
 
 const RequestParam = (props) => {
+    const errorDates = new Date(props.startDate).getTime() - new Date(props.endDate).getTime();
 
     const {
         register,
@@ -129,16 +128,13 @@ const RequestParam = (props) => {
                                         className={errors?.countDocs && s.inputError}
                                        type={"number"}
                                        placeholder="От 1 до 1000"
-                                       // value='1000'
-                                       // onChange={()=> {}}
-                                       // required
                                 />
-                                <div className={s.error}>
-                                    {errors?.countDocs && <p>Введите корректные данные</p>}
+                                <div className={classNames(s.error, s.errorCountDoc)}>
+                                    {errors?.countDocs && <p>Обязательное поле</p>}
                                 </div>
                             </label>
 
-                            <label>Диапазон поиска<span>*</span>
+                            <label>Диапазон поиска<span className={errorDates > 0  && s.spanError}>*</span>
                                 <div className={s.dateWrapper}>
                                     <input type="date"
                                            {...register("startDate", {
@@ -147,7 +143,7 @@ const RequestParam = (props) => {
                                            value={props.startDate}
                                            max={props.endDate}
                                            onChange={e => props.setStartDate(e.target.value)}
-                                           className={s.inputDate}
+                                           className={errorDates > 0  && s.inputError}
                                            required />
 
                                     <input type="date"
@@ -155,12 +151,11 @@ const RequestParam = (props) => {
                                            value={props.endDate}
                                            max={new Date().toISOString().substring(0, 10)}
                                            onChange={e => props.setEndDate(e.target.value)}
-                                           className={s.inputDate}
+                                           className={errorDates > 0 && s.inputError}
                                            required />
                                 </div>
-                                <div className={s.error}>
-                                    <p>{new Date(props.startDate).getTime() - new Date(props.endDate).getTime() === 0}</p>
-                                    {errors?.startDate && <p>Введите корректные данные</p>}
+                                <div className={classNames(s.error, s.errorDate)}>
+                                    {errorDates > 0 && <p>Введите корректные данные</p>}
                                 </div>
                             </label>
                         </div>
@@ -174,13 +169,13 @@ const RequestParam = (props) => {
                                 <li><input {...register('checkbox')} type="checkbox" value="excludeAnnouncements"/>Включать анонсы и календари</li>
                                 <li><input {...register('checkbox')} type="checkbox" value="excludeDigests"/>Включать сводки новостей</li>
                             </ul>
-                            <Button disabled={!isValid} className={classNames(s.searchBtn)}>Поиск</Button>
+                            <Button disable={isValid} className={classNames(s.searchBtn, ((errorDates < 0 || errorDates === 0) && isValid)  && s.active)}>Поиск</Button>
                             <div>* Обязательные к заполнению поля</div>
                         </div>
                     </form>
 
 
-                    {/*/!*<form*!/            Если что вернуть назад*/}
+                    {/*/!*<form*!/     7710137066      Если что вернуть назад*/}
                     {/*    className={s.formRequest}*/}
                     {/*    onSubmit={handleSubmit}>*/}
                     {/*    <div className={s.left}>*/}

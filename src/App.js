@@ -14,13 +14,14 @@ import logoModal from "./assets/images/logoModal.svg";
 import closeModal from "./assets/images/closeModal.svg";
 import Navigation from "./components/UI/navigation/Navigation";
 import line from "./assets/images/lineHeader.svg";
-import AccountInfoService from "./API/accountInfoService";
-import ObjectsearchHistograms from "./API/objectsearchHistograms";
-import Objectsearch from "./API/objectsearch";
+import AccountInfoService from "./services/accountInfoService";
+import ObjectSearchHistograms from "./services/objectSearchHistograms";
+import ObjectSearch from "./services/objectSearch";
 import Documents from "./API/documents";
 import AuthService from "./services/AuthService";
+import {v1} from "uuid";
 
-function App() {
+function App(key, value) {
 
     const [users, setUsers] = useState([{
         id: 1,
@@ -31,16 +32,22 @@ function App() {
         tariff: 'Beginner'
     },]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [fetching, setFetching] = useState(false);
+    const [fetching, setFetching] = useState(false); //при нажатии на кнопку - true/начинается запрос/по его окончании - false
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');//пока нигде не использую
     const [usedCompCount, setUsedCompCount] = useState('');
     const [compLimit, setCompLimit] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [listId, setListId] = useState([]);
+    // const [listId, setListId] = useState([]);// ПЕРЕПРОВЕРИТЬ НА ИСПОЛЬЗОВАНИЕ И УДАЛИТЬ (ЕСТЬ В localStorage)
     const [docs, setDocs] = useState([]);
     const [endDate, setEndDate] = useState('');
     const [startDate, setStartDate] = useState('');
+    const [countPerRequest] = useState(100);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [limit, setLimit] = useState(10);
+    const [offset, setOffset] = useState(0);
+    const [offsetRequest, setOffsetRequest] = useState(0);
+    const [isCompleted, setIsCompleted] = useState (false);
 
 
     const navigate = useNavigate();
@@ -51,12 +58,10 @@ function App() {
         }
     }, []);
     useEffect(() => {
-        console.log(fetching);
+        console.log('', fetching);
         if (fetching) {
             getDocuments();
         }
-
-        console.log(docs.length);
     }, [fetching])
 
     const goHome = () => navigate('/', {replace: true})
@@ -70,128 +75,129 @@ function App() {
                         localStorage.setItem('accessToken', response.data.accessToken);
                         localStorage.setItem('expire', response.data.expire);
                         setIsLoggedIn(true);
-                        const userCurrent = users.find(user => user.login === login && user.password === password);
+                        //Не нашла где взять инфо о пользователе (по идее должна же приходить с сервера),
+                        //поэтому создала переменню userCurrent c инфо о тек пользователе
+                        const userCurrent = {
+                            id: v1(),
+                            name: 'Алексей А.', //с сервера не пришло, поэтому ставлю, как в макете
+                            ava: ava1,
+                            login: login,
+                            password: password,
+                            tariff: 'Beginner' //тоже с сервера должно было прийти
+                        }
+
+
+                            // users.find(user => user.login === login && user.password === password)
+
+                        // возможно userCurrent лучше хранить в state????????????
                         localStorage.setItem('userCurrent', JSON.stringify(userCurrent));
                         fetchAccountInfo();
                         goHome();
                     }
                 })
         } catch (e) {
-            console.log('e: ', e)
-            setError(e.message);
+            setError(e.response?.status);
             setMessage('Введите корректные данные');
         }
     }
-
     function checkLogged() {
         setIsLoggedIn(true);
         fetchAccountInfo();
     }
-
     async function fetchAccountInfo() {
         setIsLoading(true);
-        const accountInfo = await AccountInfoService.getAccountInfo();
-        setCompLimit(accountInfo.companyLimit);
-        setUsedCompCount(accountInfo.usedCompanyCount);
+        await AccountInfoService.getAccountInfo()
+            .then(response => {
+                setCompLimit(response.data.eventFiltersInfo.companyLimit);
+                setUsedCompCount(response.data.eventFiltersInfo.usedCompanyCount);
+            })
         setIsLoading(false);
     }
-
     function logOut() {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('expire');
-        localStorage.removeItem('userCurrent');
-        localStorage.removeItem('data');
-        localStorage.removeItem('listId');
+        localStorage.clear();
         setIsLoggedIn(false);
-        // setUserCurrent({});
     }
-
     async function searchInfo() {
         setIsLoading(true);
-        setTimeout(async () => {
-            // const response = await ObjectsearchHistograms.getDataTotal();
-            await ObjectsearchHistograms.getDataTotal()
+        await ObjectSearchHistograms.getDataTotal()
                 .then(response => {
-                    console.log(response);
-                    let datesArr = [];
-                    let totalsArr = [];
-                    let risksArr = [];
+                    let dates = [];
+                    let totals = [];
+                    let risks = [];
 
-                    response.data[0].data.forEach(item => {
-                        datesArr.push(new Date(item.date).toLocaleDateString());
-                        totalsArr.push(item.value);
+                    response.data.data[0].data.forEach(item => {
+                        dates.push(new Date(item.date).toLocaleDateString());
+                        totals.push(item.value);
                     });
 
-                    response.data[1].data.forEach(item => risksArr.push(item.value));
+                    response.data.data[1].data.forEach(item => risks.push(item.value));
 
-                    setDate(datesArr);
-                    setTotal(totalsArr);
-                    setRisk(risksArr);
-                    console.log('результат 1го запроса: ', datesArr, totalsArr, risksArr);
+                    localStorage.setItem('date', JSON.stringify(dates));
+                    localStorage.setItem('total', JSON.stringify(totals));
+                    localStorage.setItem('risk', JSON.stringify(risks));
+    console.log('результат 1го запроса: ', dates, totals, risks);
                     searchId();
-                    setIsLoading(false);
                 })
-            console.log('результат 1го запроса в state: ', date, total, risk);
-        }, 5000);
 
-        goResult();
+        // goResult();
     }
-
     async function searchId() {
-        console.log('результат 1го запроса в state: ', date, total, risk);
-        // const responseId = await Objectsearch.getListId(inn,startDate, endDate);
-        await Objectsearch.getListId()
+        await ObjectSearch.getListId()
             .then(responseId => {
-                console.log('2ой запрос на получение ID, ответ от сервера в моей переменной: ', responseId)
+  console.log(responseId)
+                // let idArr = [];
+                let idArr = responseId.map(item => item.encodedId)
+                localStorage.setItem('listId', JSON.stringify(idArr));// использую для перезагрузки страницы результа
 
-                let idArr = [];
+  console.log('Массив айдишек: ', idArr, 'длина массива: ', idArr.length);
 
-                idArr = responseId.map(item => item.encodedId)
-
-                console.log('Массив айдишек: ', idArr, 'длина массива: ', idArr.length);
-
-                setCountId(idArr.length); //не работает
-                setListId(idArr); //не работает - сработала
-
-                console.log('Состояни - массив айдишек: ', listId);
-
-                console.log('Массив с ID, который уходит в след запрос: ', listId);
-                localStorage.setItem('listId', JSON.stringify(idArr));
-
+                console.log(JSON.parse(localStorage.getItem('listId')).length);
+                goResult();
+                getDocuments();
             })
-        getDocuments();
-        goResult();
-    }
 
-    async function getDocuments() {
-        const listIdFromLocalSt = JSON.parse(localStorage.getItem('listId'));
+
+    }
+    async function getDocuments() {debugger
+        let listIdFromLocalSt = JSON.parse(localStorage.getItem('listId'));
+
+        listIdFromLocalSt = listIdFromLocalSt.slice(0 + offsetRequest, countPerRequest + offsetRequest);
+
+        console.log(listIdFromLocalSt)
         console.log('fetching', fetching);
-        await Documents.getDocuments(listIdFromLocalSt, currentPage)
+        await Documents.getDocuments(listIdFromLocalSt)
             .then(documents => {
-                setDocs([...docs, ...documents]);
+                localStorage.setItem('docs', JSON.stringify(documents));
+                setDocs([...docs, ...documents]); //для useEffect depend in Result
+
                 console.log(documents.length);
-                console.log(listId.length);
-                setCurrentPage(prevState => prevState + 1);
+
+
+                setIsLoading(false);
+                // setCurrentPage(prevState => prevState + 1);
             })
             .finally(() => setFetching(false))
     }
 
-
+//7710137066
     const [modal, setModal] = useState(false);
     const [date, setDate] = useState([]);
     const [total, setTotal] = useState([]);
     const [risk, setRisk] = useState([]);
-    const [countId, setCountId] = useState(0);
+    const [countId, setCountId] = useState(0); //пока не использую
     const [totalCount, setTotalCount] = useState(0); //общее кол-во публикаций
-    const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
 
-    const [currentPage, setCurrentPage] = useState(1);
 
-
-    const btnHandler = () => {
-        (listId.length < docs.length) &&
-        setFetching(true);
+    const btnHandler = () => {debugger
+        // (JSON.parse(localStorage.getItem('listId')).length < docs.length) &&
+        // setFetching(true);
+        if (offset < 100) {
+            setOffset(offset + limit);
+        } else if (offsetRequest < JSON.parse(localStorage.getItem('listId')).length) {
+            setOffsetRequest(offsetRequest + 100);
+            getDocuments();
+        } else setIsCompleted(true);
     }
 
 
@@ -210,12 +216,11 @@ function App() {
                 <div>
                     <div className={s.loginPanel}>
                         <NavLink className={s.link} to="/login">Зарегистрироваться</NavLink>
-                        <img src={line} alt="line"/>
+                            <img src={line} alt="line"/>
                         <NavLink to="/loginForm"
                                  className={({isActive}) => isActive ? s.activeLink : ''}>
                             <button className={s.btnHeader}>Войти</button>
                         </NavLink>
-
                     </div>
                 </div>
             </Modal>
@@ -237,12 +242,14 @@ function App() {
                                    isLoggedin={isLoggedIn}
                                />}/>
                         <Route path="/loginForm"
-                               element={<LoginForm users={users}
+                               element={<LoginForm
+                                 //  users={users} хочу избавиться от массива пользователей
                                                    logIn={logIn}
                                                    logOut={logOut}
                                                    isLoggedIn={isLoggedIn}
                                                    setIsLoggedIn={setIsLoggedIn}
                                                    error={error}
+                                                   setError={setError}
                                                    message={message}
                                />}/>
                         <Route path="/requestParam"
@@ -264,9 +271,12 @@ function App() {
                                        risk={risk}
                                        isLoading={isLoading}
                                        countId={countId}
-                                       listId={listId}
+                                       // listId={listId}
                                        docs={docs}
-                                       btnHandler={btnHandler}/>
+                                       btnHandler={btnHandler}
+                                       limit={limit}
+                                       offset={offset}
+                                       isCompleted={isCompleted}/>
                                    // </RequireAuth>
                                }/>
                     </Routes>

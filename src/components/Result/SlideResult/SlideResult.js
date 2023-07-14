@@ -13,7 +13,7 @@ const SlideResult = ({date, total, risk}) => {
             <img src={line} alt='line'/>
         </>
 
-    );
+    );                                     //date={slides[slideNum].date} total={slides[slideNum].total} risk={slides[slideNum].risk
 };
 
 export default SlideResult;
